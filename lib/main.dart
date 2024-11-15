@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
+import 'core/secrets/superbase_secrets.dart';
 import 'core/theme/theme.dart';
 import 'feature/auth/presentation/pages/login_page.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
-
+  await Supabase.initialize(
+      url: SuperBaseSecrets.supabaseUrl,
+      anonKey: SuperBaseSecrets.supabaseAnonKey
+  );
   runApp( MyApp(),);
 }
 
