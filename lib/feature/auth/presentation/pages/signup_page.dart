@@ -1,3 +1,4 @@
+import 'package:blog_learn_2/core/common/widgets/loader.dart';
 import 'package:blog_learn_2/core/theme/app_pallete.dart';
 import 'package:blog_learn_2/feature/auth/presentation/bloc/auth_bloc.dart';
 import 'package:blog_learn_2/feature/auth/presentation/pages/login_page.dart';
@@ -33,7 +34,17 @@ class _SignupPageState extends State<SignupPage> {
       appBar: AppBar(),
       body: Padding(
         padding: const EdgeInsets.all(15.0),
-        child: Form(
+        child: BlocConsumer<AuthBloc, AuthState>(
+  listener: (context, state) {
+    if(state is AuthFailure) {
+
+    }
+  },
+  builder: (context, state) {
+    if (state is AuthLoading) {
+      const Loader();
+    }
+    return Form(
           key: formKey,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -109,7 +120,9 @@ class _SignupPageState extends State<SignupPage> {
               )
             ],
           ),
-        ),
+        );
+  },
+),
       ),
     );
   }
